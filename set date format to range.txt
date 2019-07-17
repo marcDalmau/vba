@@ -1,0 +1,12 @@
+Sub Change_Date()
+Dim oCell As Range
+Dim LastRow As Long
+
+LastRow = ActiveSheet.Range("A" & Rows.Count).End(xlUp).Row
+
+For Each oCell In ActiveSheet.Range("A1:A" & LastRow)
+    oCell.Value = Format(Trim(oCell.Value), "dd/mm/yyyy")
+Next oCell
+
+
+End Sub
