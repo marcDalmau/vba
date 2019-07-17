@@ -1,0 +1,121 @@
+Public fila As Integer
+Public standardLenght As Integer
+Public cellValue As String
+Public cellLength As Integer
+Public finalCellLength As Integer
+Public charPosition As String
+Public numberPuntoComas As Integer
+Public i As Integer
+Public positionPuntoComa1 As Integer
+Public positionPuntoComa2 As Integer
+Public a As Integer
+Public supersedeStandard As String
+Public moreThanOnePuntoComa As Boolean
+
+
+Public Sub moreThanOneSupersedeStandard()
+
+fila = 2
+
+    Do While Sheets("Hoja1").Cells(fila, 1).Value <> ""
+    
+    numberPuntoComas = 0
+    i = 1
+    a = 0
+    positionPuntoComa1 = 1
+    moreThanOnePuntoComa = False
+    
+        If Sheets("Hoja1").Cells(fila, 2).Value <> "" Then          'if column 2 is not empty
+        
+            countNumberPuntoComas
+        
+        End If
+    
+    fila = fila + 1
+    
+    Loop
+
+End Sub
+
+
+Sub countNumberPuntoComas()                                       'FUNCTION TO COUNT HOW MANY ";" ARE IN THE STRING
+
+cellValue = Sheets("Hoja1").Cells(fila, 2).Value
+cellLength = Len(cellValue)
+
+finalCellLength = cellLength + 1
+
+    Do While i < (finalCellLength)
+        
+        lookForPuntoComa
+        i = i + 1
+    
+    Loop
+
+End Sub
+
+
+Sub lookForPuntoComa()                                       'FUNCTION ASSOCIATED TO THE countNumberPuntoComas FUNCTION
+
+charPosition = Mid(cellValue, i, 1)
+charPositionPlusOne = Mid(cellValue, i + 1, 1)
+       
+    If charPosition = ";" Then
+    
+            If charPositionPlusOne <> "" And moreThanOnePuntoComa = False Then                           'In case there is more than one standard, we add punto coma at the end of the string "cellValue
+        
+                cellValue = cellValue & ";"  'this punto y coma added aims to avoid not writing the latest standard of the string
+                finalCellLength = finalCellLength + 1
+                moreThanOnePuntoComa = True
+                
+            End If
+    
+        numberPuntoComas = numberPuntoComas + 1
+        positionPuntoComa2 = i
+        insertRow
+        extractRootOfStandard
+            
+    End If
+
+End Sub
+
+
+Sub insertRow()                                              'FUNCTION TO INSERT ROWS. AS MANY AS ";" ARE (LESS 1!)
+
+    If numberPuntoComas > 1 Then
+    
+        Rows(fila + a).Insert shift:=xlShiftDown
+    
+    End If
+
+End Sub
+                                                            'FUNCTION ASSOCIATED TO THE lookForPuntoComa FUNCTION //by using Mid function to extract the supersede standard
+Sub extractRootOfStandard()
+    
+    If a > 0 Then                                       'second time, first position would be ";", so it avoids to write this punto y coma
+    
+        positionPuntoComa1 = positionPuntoComa1 + 1
+    
+    End If
+    
+    supersedeStandard = Mid(cellValue, positionPuntoComa1, (positionPuntoComa2 - 1) - (positionPuntoComa1 - 1))          'we start getting the standard from the LEFT side
+    positionPuntoComa1 = positionPuntoComa2
+    writeRowDataOfFila
+    
+    a = a + 1
+    
+
+End Sub
+
+
+Sub writeRowDataOfFila()
+
+    Sheets("Hoja1").Cells(fila + a, 2).Value = supersedeStandard        'we write supersedeStandard in column 2
+        
+    If numberPuntoComas > 1 Then
+        Sheets("Hoja1").Cells(fila + a, 1).Value = Sheets("Hoja1").Cells(fila, 1).Value        'copy-paste column 1 value to next row
+        Sheets("Hoja1").Cells(fila + a, 3).Value = Sheets("Hoja1").Cells(fila, 3).Value        'copy-paste column 3 value to next row
+        Sheets("Hoja1").Cells(fila + a, 4).Value = Sheets("Hoja1").Cells(fila, 4).Value        'copy-paste column 4 value to next row and so on...
+    End If
+    
+End Sub
