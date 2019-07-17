@@ -1,0 +1,17 @@
+Sub guardarEmailsArutaEspecifica(correu As Outlook.MailItem)
+
+Dim adjunt As Outlook.Attachment
+Dim ruta As String
+Dim dateFormat
+    dateFormat = Format(Now, "yyyy-mm-dd H-mm")
+    
+ruta = "C:\Users\Documents\"
+
+     For Each adjunt In correu.Attachments
+     
+          adjunt.SaveAsFile ruta & "\" & dateFormat & adjunt.DisplayName
+          Set adjunt = Nothing
+          
+     Next
+
+End Sub
