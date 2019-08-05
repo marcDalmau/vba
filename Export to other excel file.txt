@@ -1,0 +1,162 @@
+Public lastWrittenRow, Row, legiRow, standardRow, legiNextWrittenRow, standardNextWrittenRow, nextWrittenRow, someEntry As Integer
+Public sumOne As Integer
+
+
+
+Public Sub exportToControl()
+Row = 1
+legiRow = 13
+standardRow = 13
+
+findLastWrittenRow
+kDataEntry 'so at least constant data is entered one time, even no legi and no standard
+
+TSdataEntryEU
+    legiRow = legiRow + 1
+    standardRow = standardRow + 1
+TSdataEntryES
+    legiRow = legiRow + 1
+    standardRow = standardRow + 1
+TSdataEntryPT
+
+MsgBox "DATOS EXPORTADOS AL CONTROL CORRECTAMENTE"
+
+End Sub
+
+Sub TSdataEntryEU()
+
+
+Do While Sheets("REGULATORY").Cells(legiRow, 2) <> "LEGISLACIÓN ESPAÑOLA"
+
+    
+    'setLegiString 'to remove key words: REGULATION / DIRECTIVE / ETC
+    'setStandardString 'to remove as many "*" as there are
+    copyPasteLegiAndStandard
+    'nextWrittenRow = nextWrittenRow + WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) + sumOne
+    
+    If WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) = nextWrittenRow Then
+    
+        nextWrittenRow = nextWrittenRow
+    Else
+    
+        nextWrittenRow = WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) + sumOne
+    
+    End If
+    
+Loop
+
+End Sub
+
+
+Sub TSdataEntryES()
+
+
+Do While Sheets("REGULATORY").Cells(legiRow, 2) <> "LEGISLACIÓN PORTUGUESA"
+
+    
+    'setLegiString 'to remove key words: REGULATION / DIRECTIVE / ETC
+    'setStandardString 'to remove as many "*" as there are
+    copyPasteLegiAndStandard
+    'nextWrittenRow = nextWrittenRow + WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) + sumOne
+    
+    If WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) = nextWrittenRow Then
+    
+        nextWrittenRow = nextWrittenRow
+    Else
+    
+        nextWrittenRow = WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) + sumOne
+    
+    End If
+    
+Loop
+
+End Sub
+
+
+Sub TSdataEntryPT()
+
+
+Do While Sheets("REGULATORY").Cells(legiRow, 2) <> "OTROS DOCUMENTOS"
+
+    
+    'setLegiString 'to remove key words: REGULATION / DIRECTIVE / ETC
+    'setStandardString 'to remove as many "*" as there are
+    copyPasteLegiAndStandard
+    'nextWrittenRow = nextWrittenRow + WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) + sumOne
+    
+    If WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) = nextWrittenRow Then
+    
+        nextWrittenRow = nextWrittenRow
+    Else
+    
+        nextWrittenRow = WorksheetFunction.Max(legiNextWrittenRow, standardNextWrittenRow) + sumOne
+    
+    End If
+    
+Loop
+
+End Sub
+
+Sub copyPasteLegiAndStandard()
+
+    legiNextWrittenRow = nextWrittenRow
+    standardNextWrittenRow = nextWrittenRow
+    
+    someEntry = 0
+    
+    If Sheets("REGULATORY").Cells(legiRow, 2) <> "" Then
+    
+        Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(legiNextWrittenRow, 8) = Sheets("REGULATORY").Cells(legiRow, 2)
+        
+        legiNextWrittenRow = legiNextWrittenRow + 1
+        someEntry = 1
+    
+    End If
+    
+    If Sheets("REGULATORY").Cells(standardRow, 4) <> "" Then
+    
+        Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(standardNextWrittenRow, 13) = Sheets("REGULATORY").Cells(standardRow, 4)
+        
+        standardNextWrittenRow = standardNextWrittenRow + 1
+        someEntry = 1
+    
+    End If
+    
+    If someEntry = 1 Then
+        
+        kDataEntry
+        sumOne = 0
+    
+    Else
+    
+        sumOne = 1
+    
+    End If
+    
+    legiRow = legiRow + 1
+    standardRow = standardRow + 1
+
+End Sub
+
+Sub findLastWrittenRow()
+
+Do While Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(Row, 1) <> ""
+
+Row = Row + 1
+
+Loop
+
+lastWrittenRow = Row
+nextWrittenRow = lastWrittenRow
+
+End Sub
+
+Sub kDataEntry() 'constant data
+
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 1) = Sheets("REGULATORY").Cells(6, 3) 'id referencia
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 2) = Sheets("REGULATORY").Cells(4, 3) 'tipología
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 3) = Sheets("REGULATORY").Cells(3, 3) 'sección
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 4) = "LEROY MERLIN"
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 5) = "FICHA"
+
+End Sub
