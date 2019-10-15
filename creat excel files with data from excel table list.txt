@@ -1,0 +1,75 @@
+Public fila, counter As Integer
+Public NewFileName, fileName, OldFileName, strNew, GivenLocation, OldFilePath, tempName, counter2 As String
+
+
+Public Sub create()
+
+Dim wb As Workbook
+
+OldFilePath = "W:\EPTS\03. DEPARTAMENTOS\03. TÉCNICO\03. REGULATORY\08. HERRAMIENTAS DE TRABAJO\Create excel sheet from table\Nueva carpeta\xxxx_XXV00_fileName - copia (2).xls"
+GivenLocation = "W:\EPTS\03. DEPARTAMENTOS\03. TÉCNICO\03. REGULATORY\08. HERRAMIENTAS DE TRABAJO\Create excel sheet from table\Nueva carpeta\"
+OldFileName = "xxxx_XXV00_fileName - copia (2).xls"
+
+fila = 2
+'counter1 = " - copia ("
+counter = 2
+counter2 = counter
+'counter3 = ")"
+
+Set wb = Workbooks.Add(OldFilePath)
+
+Do While Workbooks("create.xls").Sheets("Hoja1").Cells(fila, 7) <> ""
+    
+    getName
+    
+    Name GivenLocation & OldFileName As GivenLocation & NewFileName
+    
+    counter = counter + 1
+    counter2 = counter
+    
+    strNew = GivenLocation + "xxxx_XXV00_fileName" + " - copia (" + counter2 + ")" + ".xls"
+    
+    OldFileName = "xxxx_XXV00_fileName" + " - copia (" + counter2 + ")" + ".xls"
+    
+    
+    If Sheets("Hoja1").Cells(fila + 1, 7) <> "" Then
+    
+        Set wb = Workbooks.Add(strNew)
+        
+    End If
+    
+
+fila = fila + 1
+Loop
+Workbooks.Close
+End Sub
+
+Sub getName()
+
+fileName = Sheets("Hoja1").Cells(fila, 7)
+
+NewFileName = fileName + ".xls"
+
+End Sub
+
+
+Public Sub pasteDesiredCells() 'to be applied once all desired excel files are open and create() macro was already run
+
+fila = 2
+
+Do While Workbooks("create.xls").Sheets("Hoja1").Cells(fila, 7) <> ""
+
+    getName
+    
+    Workbooks(NewFileName).Sheets("REGULATORY").Cells(3, 3) = Workbooks("create.xls").Sheets("Hoja1").Cells(fila, 3)
+    Workbooks(NewFileName).Sheets("REGULATORY").Cells(4, 3) = Workbooks("create.xls").Sheets("Hoja1").Cells(fila, 5)
+    Workbooks(NewFileName).Sheets("REGULATORY").Cells(5, 3) = Workbooks("create.xls").Sheets("Hoja1").Cells(fila, 6)
+    Workbooks(NewFileName).Sheets("REGULATORY").Cells(6, 3) = Workbooks("create.xls").Sheets("Hoja1").Cells(fila, 1)
+    
+    'ActiveWorkbook.Close SaveChanges:=wdPromptToSaveChanges
+    
+fila = fila + 1
+Loop
+
+Workbooks.Close
+End Sub

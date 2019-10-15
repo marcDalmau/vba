@@ -1,0 +1,31 @@
+Public carpeta As String
+
+
+Public Sub getFileName()
+
+  'Sección 1: Variables a utilizar en la macro
+    Dim archivos As String
+    Dim contador As Integer
+    
+    'Sección 2: Lectura de carpeta y ajustes necesarios
+    carpeta = InputBox("Ingresa la ruta de la carpeta a importar:")
+    
+    
+    If carpeta = "" Then
+        Exit Sub
+    ElseIf Right(carpeta, 1) <> "\" Then
+        carpeta = carpeta & "\"
+    End If
+    
+    'Sección 3: Preparación de variables
+    contador = 1
+    archivos = Dir(carpeta)
+    
+    'Sección 4: Recorrido de la carpeta
+    Do While Len(archivos) > 0
+        ActiveSheet.Cells(contador, 1).Value = archivos
+        archivos = Dir()
+        contador = contador + 1
+    Loop
+    
+End Sub
