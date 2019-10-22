@@ -1,0 +1,238 @@
+Public GivenLocation, legiSTfileName, legiSTfinalFile, fileName, TSname, legiSTfileNameprevious As String
+Public nextWrittableRow, filaMarking, filaTSMarkingP, filaTSmarkingM, filaTSmarking, contadorFila, contadorFilaP, contadorFilaM, filaFile As Integer
+Public carpeta As String
+Public sameFile, sameFileP, sameFileM As Boolean
+
+
+
+Sub fillInTS()
+
+Dim wb As Workbook 'SI DONA ERROR, PUC PROVAR DE DECLARAR COM A VARIABLE GLOBAL
+sameFile = False
+sameFileP = False
+sameFileM = False
+
+findTSname
+
+filaFile = 1 'DE LA FULLA 1 QUE HI HA EL LLISTAT QUE HE IMPRÈS AMB GET FILE FUNCTION
+filaMarking = 3 'DE LA QUE LLEGEIXO
+filaTSmarking = 3
+filaTSMarkingP = 3
+filaTSmarkingM = 3
+contadorFila = filaTSmarking
+contadorFilaP = filaTSMarkingP
+contadorFilaM = filaTSmarkingM
+
+Do While Workbooks(TSname).Sheets("Hoja1").Cells(filaFile, 1) <> ""
+
+getName
+GivenLocation = "W:\EPTS\03. DEPARTAMENTOS\03. TÉCNICO\03. REGULATORY\05. LEGISLACIÓN Y NORMATIVA\02. MARKING\" 'li donc la ruta
+legiSTfinalFile = GivenLocation + legiSTfileName 'li donc la ruta amb l'arxiu a obrir i traspassar la info
+
+
+    If Workbooks(TSname).Sheets("Hoja1").Cells(filaFile, 2) <> "" Then
+    
+        printLegiSt 'sub que imprimeix els marking, manual, packaging d'una legi o una norma
+    
+    End If
+    
+filaFile = filaFile + 1
+Loop
+
+Workbooks.Close
+
+End Sub
+
+
+Sub getName()
+
+fileName = Workbooks(TSname).Sheets("Hoja1").Cells(filaFile, 1)
+
+legiSTfileName = fileName
+
+End Sub
+
+Sub printLegiSt()
+
+    
+    Set wb = Workbooks.Add(legiSTfinalFile)
+    wb.Save
+    
+    findLegiSTname
+    
+    findNextWrittableRow 'return nextWrittableRow
+    
+    Do While Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 2) <> ""
+
+'--------------------------------------------------------------------------- MARCADO:
+        
+        
+        If Workbooks(legiSTfileName).Sheets("sheet1").Cells(filaMarking, 2) = "MARKING" Then
+        
+                If sameFile = False Then
+                
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(1, 1)
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3).Interior.ColorIndex = 34
+                    filaTSmarking = filaTSmarking + 1
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3) = "DESCRIPCIÓN"
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 4) = "SÍMBOLO"
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3).Interior.ColorIndex = 34
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 4).Interior.ColorIndex = 34
+                    filaTSmarking = filaTSmarking + 1
+                    sameFile = True
+                
+                End If
+        
+                Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 3)
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' PROCÉS ENGANXAR IMATGE
+Workbooks(legiSTfileName).Sheets("Sheet1").Activate
+    Range(Cells(filaMarking, 4), Cells(filaMarking, 4)).Copy
+ 
+Workbooks(TSname).Sheets("MARCADO").Activate 'selecciono la hoja donde quiero pegar y después la celda
+    Cells(filaTSmarking, 4).Select
+    ActiveSheet.Paste 'pego la fila que hemos copiado
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                'Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 4) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 4)
+        
+        filaTSmarking = filaTSmarking + 1
+        End If
+'--------------------------------------------------------------------------- EMBALAJE:
+               
+        If Workbooks(legiSTfileName).Sheets("sheet1").Cells(filaMarking, 2) = "PACKAGING" Then
+        
+                 If sameFileP = False Then
+                
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(1, 1)
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3).Interior.ColorIndex = 34
+                    filaTSMarkingP = filaTSMarkingP + 1
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3) = "DESCRIPCIÓN"
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 4) = "SÍMBOLO"
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3).Interior.ColorIndex = 34
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 4).Interior.ColorIndex = 34
+                    filaTSMarkingP = filaTSMarkingP + 1
+                    sameFileP = True
+                
+                End If
+        
+                Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 3)
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' PROCÉS ENGANXAR IMATGE
+Workbooks(legiSTfileName).Sheets("Sheet1").Activate
+    Range(Cells(filaMarking, 4), Cells(filaMarking, 4)).Copy
+ 
+Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Activate 'selecciono la hoja donde quiero pegar y después la celda
+    Cells(filaTSMarkingP, 4).Select
+    ActiveSheet.Paste 'pego la fila que hemos copiado
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                
+                'Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 4) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 4)
+        
+        filaTSMarkingP = filaTSMarkingP + 1
+        End If
+'--------------------------------------------------------------------------- MANUAL:
+
+               
+        If Workbooks(legiSTfileName).Sheets("sheet1").Cells(filaMarking, 2) = "MANUAL" Then
+        
+                If sameFileM = False Then
+                
+                    Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(1, 1)
+                    Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3).Interior.ColorIndex = 34
+                    filaTSmarkingM = filaTSmarkingM + 1
+                    Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3) = "DESCRIPCIÓN"
+                    Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3).Interior.ColorIndex = 34
+                    filaTSmarkingM = filaTSmarkingM + 1
+                    sameFileM = True
+                
+                End If
+        
+                Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 3)
+                Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 4) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 4)
+        
+        filaTSmarkingM = filaTSmarkingM + 1
+        End If
+
+'---------------------------------------------------------------------------
+
+    filaMarking = filaMarking + 1
+    
+    Loop
+    sameFile = False
+    sameFileP = False
+    sameFileM = False
+    filaMarking = 3
+
+
+End Sub
+
+Sub findNextWrittableRow()
+
+    Do While Workbooks(TSname).Sheets("MARCADO").Cells(contadorFila, 3) <> ""
+    
+        contadorFila = contadorFila + 1
+    
+    Loop
+    
+    Do While Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(contadorFilaP, 3) <> ""
+    
+        contadorFilaP = contadorFilaP + 1
+    
+    Loop
+    
+    Do While Workbooks(TSname).Sheets("MANUAL").Cells(contadorFilaM, 3) <> ""
+    
+        contadorFilaM = contadorFilaM + 1
+    
+    Loop
+    
+    filaTSmarking = contadorFila
+    filaTSMarkingP = contadorFilaP
+    filaTSmarkingM = contadorFilaM
+
+End Sub
+
+Sub findTSname()
+
+    TSname = ActiveWorkbook.Name
+
+End Sub
+
+Sub findLegiSTname()
+
+    legiSTfileName = ActiveWorkbook.Name
+
+End Sub
+
+
+Public Sub getFileName()
+
+  'Sección 1: Variables a utilizar en la macro
+    Dim archivos As String
+    Dim contador As Integer
+    
+    'Sección 2: Lectura de carpeta y ajustes necesarios
+    carpeta = InputBox("Ingresa la ruta de la carpeta a importar:")
+    
+    'findTSname
+    
+    If carpeta = "" Then
+        Exit Sub
+    ElseIf Right(carpeta, 1) <> "\" Then
+        carpeta = carpeta & "\"
+    End If
+    
+    'Sección 3: Preparación de variables
+    contador = 1
+    archivos = Dir(carpeta)
+    
+    'Sección 4: Recorrido de la carpeta
+    Do While Len(archivos) > 0
+        Sheets("Hoja1").Cells(contador, 1).Value = archivos
+        archivos = Dir()
+        contador = contador + 1
+    Loop
+    
+End Sub
