@@ -14,7 +14,7 @@ sameFileM = False
 
 findTSname
 
-filaFile = 1 'DE LA FULLA 1 QUE HI HA EL LLISTAT QUE HE IMPR萐 AMB GET FILE FUNCTION
+filaFile = 1 'DE LA FULLA 1 QUE HI HA EL LLISTAT QUE HE IMPR脠S AMB GET FILE FUNCTION
 filaMarking = 3 'DE LA QUE LLEGEIXO
 filaTSmarking = 3
 filaTSMarkingP = 3
@@ -26,7 +26,7 @@ contadorFilaM = filaTSmarkingM
 Do While Workbooks(TSname).Sheets("Hoja1").Cells(filaFile, 1) <> ""
 
 getName
-GivenLocation = "W:\EPTS\03. DEPARTAMENTOS\03. T蒀NICO\03. REGULATORY\05. LEGISLACI覰 Y NORMATIVA\02. MARKING\" 'li donc la ruta
+GivenLocation = "W:\MARKING\" 'li donc la ruta
 legiSTfinalFile = GivenLocation + legiSTfileName 'li donc la ruta amb l'arxiu a obrir i traspassar la info
 
 
@@ -74,8 +74,8 @@ Sub printLegiSt()
                     Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(1, 1)
                     Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3).Interior.ColorIndex = 34
                     filaTSmarking = filaTSmarking + 1
-                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3) = "DESCRIPCI覰"
-                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 4) = "S蚆BOLO"
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3) = "DESCRIPCI脫N"
+                    Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 4) = "S脥MBOLO"
                     Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3).Interior.ColorIndex = 34
                     Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 4).Interior.ColorIndex = 34
                     filaTSmarking = filaTSmarking + 1
@@ -85,11 +85,11 @@ Sub printLegiSt()
         
                 Workbooks(TSname).Sheets("MARCADO").Cells(filaTSmarking, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 3)
 
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' PROC蒘 ENGANXAR IMATGE
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' PROC脡S ENGANXAR IMATGE
 Workbooks(legiSTfileName).Sheets("Sheet1").Activate
     Range(Cells(filaMarking, 4), Cells(filaMarking, 4)).Copy
  
-Workbooks(TSname).Sheets("MARCADO").Activate 'selecciono la hoja donde quiero pegar y despu閟 la celda
+Workbooks(TSname).Sheets("MARCADO").Activate 'selecciono la hoja donde quiero pegar y despu茅s la celda
     Cells(filaTSmarking, 4).Select
     ActiveSheet.Paste 'pego la fila que hemos copiado
 
@@ -107,8 +107,8 @@ Workbooks(TSname).Sheets("MARCADO").Activate 'selecciono la hoja donde quiero pe
                     Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(1, 1)
                     Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3).Interior.ColorIndex = 34
                     filaTSMarkingP = filaTSMarkingP + 1
-                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3) = "DESCRIPCI覰"
-                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 4) = "S蚆BOLO"
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3) = "DESCRIPCI脫N"
+                    Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 4) = "S脥MBOLO"
                     Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3).Interior.ColorIndex = 34
                     Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 4).Interior.ColorIndex = 34
                     filaTSMarkingP = filaTSMarkingP + 1
@@ -118,11 +118,11 @@ Workbooks(TSname).Sheets("MARCADO").Activate 'selecciono la hoja donde quiero pe
         
                 Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Cells(filaTSMarkingP, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(filaMarking, 3)
 
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' PROC蒘 ENGANXAR IMATGE
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' PROC脡S ENGANXAR IMATGE
 Workbooks(legiSTfileName).Sheets("Sheet1").Activate
     Range(Cells(filaMarking, 4), Cells(filaMarking, 4)).Copy
  
-Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Activate 'selecciono la hoja donde quiero pegar y despu閟 la celda
+Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Activate 'selecciono la hoja donde quiero pegar y despu茅s la celda
     Cells(filaTSMarkingP, 4).Select
     ActiveSheet.Paste 'pego la fila que hemos copiado
 
@@ -142,7 +142,7 @@ Workbooks(TSname).Sheets("EMBALAJE - PUNTO VENTA").Activate 'selecciono la hoja 
                     Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3) = Workbooks(legiSTfileName).Sheets("Sheet1").Cells(1, 1)
                     Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3).Interior.ColorIndex = 34
                     filaTSmarkingM = filaTSmarkingM + 1
-                    Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3) = "DESCRIPCI覰"
+                    Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3) = "DESCRIPCI脫N"
                     Workbooks(TSname).Sheets("MANUAL").Cells(filaTSmarkingM, 3).Interior.ColorIndex = 34
                     filaTSmarkingM = filaTSmarkingM + 1
                     sameFileM = True
@@ -209,11 +209,11 @@ End Sub
 
 Public Sub getFileName()
 
-  'Secci髇 1: Variables a utilizar en la macro
+  'Secci贸n 1: Variables a utilizar en la macro
     Dim archivos As String
     Dim contador As Integer
     
-    'Secci髇 2: Lectura de carpeta y ajustes necesarios
+    'Secci贸n 2: Lectura de carpeta y ajustes necesarios
     carpeta = InputBox("Ingresa la ruta de la carpeta a importar:")
     
     'findTSname
@@ -224,11 +224,11 @@ Public Sub getFileName()
         carpeta = carpeta & "\"
     End If
     
-    'Secci髇 3: Preparaci髇 de variables
+    'Secci贸n 3: Preparaci贸n de variables
     contador = 1
     archivos = Dir(carpeta)
     
-    'Secci髇 4: Recorrido de la carpeta
+    'Secci贸n 4: Recorrido de la carpeta
     Do While Len(archivos) > 0
         Sheets("Hoja1").Cells(contador, 1).Value = archivos
         archivos = Dir()
