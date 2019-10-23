@@ -26,7 +26,7 @@ End Sub
 Sub TSdataEntryEU()
 
 
-Do While Sheets("REGULATORY").Cells(legiRow, 2) <> "LEGISLACIÓN ESPAÑOLA"
+Do While Sheets("REGULATORY").Cells(legiRow, 2) <> "LEGISLACIÃ“N ESPAÃ‘OLA"
 
     
     'setLegiString 'to remove key words: REGULATION / DIRECTIVE / ETC
@@ -51,7 +51,7 @@ End Sub
 Sub TSdataEntryES()
 
 
-Do While Sheets("REGULATORY").Cells(legiRow, 2) <> "LEGISLACIÓN PORTUGUESA"
+Do While Sheets("REGULATORY").Cells(legiRow, 2) <> "LEGISLACIÃ“N PORTUGUESA"
 
     
     'setLegiString 'to remove key words: REGULATION / DIRECTIVE / ETC
@@ -154,9 +154,9 @@ End Sub
 Sub kDataEntry() 'constant data
 
 Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 1) = Sheets("REGULATORY").Cells(6, 3) 'id referencia
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 2) = Sheets("REGULATORY").Cells(4, 3) 'tipología
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 3) = Sheets("REGULATORY").Cells(3, 3) 'sección
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 4) = "LEROY MERLIN"
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 2) = Sheets("REGULATORY").Cells(4, 3) 'tipologÃ­a
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 3) = Sheets("REGULATORY").Cells(3, 3) 'secciÃ³n
+Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 4) = "CLIENT NAME"
 Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 5) = "FICHA"
 
 End Sub
