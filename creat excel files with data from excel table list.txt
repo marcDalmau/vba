@@ -6,8 +6,8 @@ Public Sub create()
 
 Dim wb As Workbook
 
-OldFilePath = "W:\EPTS\03. DEPARTAMENTOS\03. TÉCNICO\03. REGULATORY\08. HERRAMIENTAS DE TRABAJO\Create excel sheet from table\Nueva carpeta\xxxx_XXV00_fileName - copia (2).xls"
-GivenLocation = "W:\EPTS\03. DEPARTAMENTOS\03. TÉCNICO\03. REGULATORY\08. HERRAMIENTAS DE TRABAJO\Create excel sheet from table\Nueva carpeta\"
+OldFilePath = "W:\HERRAMIENTAS DE TRABAJO\Create excel sheet from table\Nueva carpeta\xxxx_XXV00_fileName - copia (2).xls"
+GivenLocation = "W:\HERRAMIENTAS DE TRABAJO\Create excel sheet from table\Nueva carpeta\"
 OldFileName = "xxxx_XXV00_fileName - copia (2).xls"
 
 fila = 2
