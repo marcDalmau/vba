@@ -1,0 +1,27 @@
+Sub enviar_excel_per_email()
+'by marc
+    Dim OutApp As Object
+    Dim OutMail As Object
+
+    Set OutApp = CreateObject("Outlook.Application")
+    Set OutMail = OutApp.CreateItem(0)
+
+    On Error Resume Next
+    With OutMail
+    .to = "ddddddt@dddddd.com ; ddddddt@dddddd.com"
+    .CC = "email1encopia@eurofins.com ; email2encopia@eurofins.com"
+    '.BCC = "mmmm@mmmm.com ; mmmm@mmmm.com"
+    .Subject = "Aquest és un email important per vostè"
+    .BodyFormat = olFormatHTML
+    .HTMLBody = "Aquest és l'informe de l'assaig que havies demanat..."
+    .Attachments.Add ActiveWorkbook.FullName
+    '.DeferredDeliveryTime = "8/8/2019 10.00"
+    .Importance = olImportanceHigh
+    .ReadReceiptRequested = True
+    .Send 'display if you prefer to see the email before send
+End With
+    On Error GoTo 0
+
+    Set OutMail = Nothing
+    Set OutApp = Nothing
+End Sub
