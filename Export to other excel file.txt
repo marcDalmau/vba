@@ -106,7 +106,7 @@ Sub copyPasteLegiAndStandard()
     
     If Sheets("REGULATORY").Cells(legiRow, 2) <> "" Then
     
-        Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(legiNextWrittenRow, 8) = Sheets("REGULATORY").Cells(legiRow, 2)
+        Workbooks("Legislation.xlsm").Sheets("Items").Cells(legiNextWrittenRow, 8) = Sheets("REGU").Cells(legiRow, 2)
         
         legiNextWrittenRow = legiNextWrittenRow + 1
         someEntry = 1
@@ -115,7 +115,7 @@ Sub copyPasteLegiAndStandard()
     
     If Sheets("REGULATORY").Cells(standardRow, 4) <> "" Then
     
-        Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(standardNextWrittenRow, 13) = Sheets("REGULATORY").Cells(standardRow, 4)
+        Workbooks("Legislation.xlsm").Sheets("Items").Cells(standardNextWrittenRow, 13) = Sheets("REGU").Cells(standardRow, 4)
         
         standardNextWrittenRow = standardNextWrittenRow + 1
         someEntry = 1
@@ -140,7 +140,7 @@ End Sub
 
 Sub findLastWrittenRow()
 
-Do While Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(Row, 1) <> ""
+Do While Workbooks("Legislation.xlsm").Sheets("Items").Cells(Row, 1) <> ""
 
 Row = Row + 1
 
@@ -153,10 +153,10 @@ End Sub
 
 Sub kDataEntry() 'constant data
 
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 1) = Sheets("REGULATORY").Cells(6, 3) 'id referencia
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 2) = Sheets("REGULATORY").Cells(4, 3) 'tipología
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 3) = Sheets("REGULATORY").Cells(3, 3) 'sección
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 4) = "CLIENT NAME"
-Workbooks("Legislation and standard updates control.xlsm").Sheets("Items").Cells(nextWrittenRow, 5) = "FICHA"
+Workbooks("Legislation.xlsm").Sheets("Items").Cells(nextWrittenRow, 1) = Sheets("REGULATORY").Cells(6, 3) 'id referencia
+Workbooks("Legislation.xlsm").Sheets("Items").Cells(nextWrittenRow, 2) = Sheets("REGULATORY").Cells(4, 3) 'tipología
+Workbooks("Legislation.xlsm").Sheets("Items").Cells(nextWrittenRow, 3) = Sheets("REGULATORY").Cells(3, 3) 'sección
+Workbooks("Legislation.xlsm").Sheets("Items").Cells(nextWrittenRow, 4) = "CLIENT NAME"
+Workbooks("Legislation.xlsm").Sheets("Items").Cells(nextWrittenRow, 5) = "FICHA"
 
 End Sub
